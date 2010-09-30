@@ -59,7 +59,7 @@ Right now, RapidSMS isn't very well documented. We're working on that on `the Ra
 Dependencies
 ============
 
-* `Python <http://python.org>`_
+* `Python 2.6 <http://python.org>`_
 * `Django <http://djangoproject.com>`_
 * `django-nose <http://pypi.python.org/pypi/django-nose>`_
 * `djappsettings <http://pypi.python.org/pypi/djappsettings>`_
