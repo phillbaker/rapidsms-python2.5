@@ -34,5 +34,5 @@ class Command(LabelCommand):
         #or how about setting django.__path__[0] to rapidsms.__path__[0] and putting rapidsms/skeleton/project in rapidsms/conf/project_template to match django?
         #copy_helper(self.style, 'project', src_dir, project_name)
         shutil.copytree(src_dir, project_name)
-        os.system('find ./project_name -name "*.pyc" -delete')
+        os.system('find ./' + project_name + ' -name "*.pyc" -delete')
         
