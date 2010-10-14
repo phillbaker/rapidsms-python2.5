@@ -4,7 +4,7 @@
 
 import re
 from rapidsms.apps.base import AppBase
-from .models import *
+from .models import Location
 
 
 class App(AppBase):

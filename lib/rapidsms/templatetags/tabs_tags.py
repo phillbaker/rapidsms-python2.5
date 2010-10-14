@@ -51,7 +51,7 @@ class TabsNode(template.Node):
         # (this no blow up property is mostly used during testing)
         try:
             request = Variable("request").resolve(context)
-        except Exception as e:
+        except Exception:
             return ""
 
         for tab in self.tabs:

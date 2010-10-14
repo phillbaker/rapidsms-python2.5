@@ -177,7 +177,7 @@ class Router(object, LoggerMixin):
         """
 
         for backend in self.backends.values():
-            alive = backend.__thread.is_alive
+            alive = backend.__thread.isAlive
             if not alive(): continue
             backend.stop()
 

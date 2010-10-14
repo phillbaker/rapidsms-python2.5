@@ -6,7 +6,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.forms import widgets
 from django.forms import fields
 from django import forms
-from .models import *
+from .models import Point
+from .models import Location
 
 
 class PointWidget(widgets.MultiWidget):
