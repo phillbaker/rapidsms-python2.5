@@ -12,7 +12,7 @@ import rapidsms
 
 # this is mostly copy/pasted from django. unfortunately, the copy
 # mechanism had to be replaced, since django hard-codes the path 
-# of the template file.
+# of the template file in copy_helper
 
 class Command(LabelCommand):
     help = 'Creates a RapidSMS project in the current directory.'
@@ -29,10 +29,11 @@ class Command(LabelCommand):
                 project_name)
 
         src_dir = os.path.join(rapidsms.__path__[0], 'skeleton', 'project')
-        #use Django's copy_helper, not shutil.copytree
-        #shutil.copytree(src_dir, project_name, ignore=shutil.ignore_patterns('*.pyc'))
-        #or how about setting django.__path__[0] to rapidsms.__path__[0] and putting rapidsms/skeleton/project in rapidsms/conf/project_template to match django?
-        #copy_helper(self.style, 'project', src_dir, project_name)
         shutil.copytree(src_dir, project_name)
-        os.system('find ./' + project_name + ' -name "*.pyc" -delete')
+        
+        #pythonic kludge to clean out *.pyc files
+        for dirpath, dirnames, filenames in os.walk(project_name):
+            for name in filenames:
+                if name.endswith('.pyc'): 
+                    os.remove(os.path.join(dirpath, name))
         
