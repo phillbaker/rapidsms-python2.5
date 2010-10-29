@@ -10,3 +10,5 @@ core.*
 *.sqlite3
 dist
 build
+.DS_Store
+
