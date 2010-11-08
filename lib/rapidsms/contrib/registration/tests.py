@@ -1,6 +1,10 @@
 
 import unittest
 from rapidsms.tests.scripted import TestScript
+#from  rapidsms.tests.harness import MockApp#TODO something is causing these tests to hang. Is it the lack of apps=''? Is it because there is no App for registration? Why isn't there a bug filed for this
+#is there a bug in the harness/etc for using a non-app handler?
+#why does it not hang/block when tests fail? why does it only mess up with everything else works?
+#looks like it's really assertInteration that's the problem
 
 class TestRegister(TestScript):
 

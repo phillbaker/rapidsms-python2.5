@@ -5,7 +5,6 @@
 import time
 import logging
 from rapidsms.router import router as globalrouter
-from harness import EchoApp
 import unittest, re, threading
 from django.test import TransactionTestCase
 from django.conf import settings
@@ -13,7 +12,7 @@ from datetime import datetime
 from rapidsms.log.mixin import LoggerMixin
 
 class TestScript (TransactionTestCase, LoggerMixin):
-    # we use the TransactionTestCase so that the router thread has access
+    # we use the TransactionTestCaseionTestCase so that the router thread has access
     # to the DB objects used outside and vice versa.
     # see: http://docs.djangoproject.com/en/dev/releases/1.1/#releases-1-1
 
@@ -166,30 +165,6 @@ class TestScript (TransactionTestCase, LoggerMixin):
 
     def runScript (self, script):
         self.runParsedScript(self.parseScript(script))
-
-class MockTestScript (TestScript):
-    apps = (EchoApp,)
-
-    testScript = """
-        8005551212 > hello
-        8005551212 < 8005551212: hello
-    """
-    testScript2 = """
-        1234567890 > echo this!
-        1234567890 < 1234567890: echo this!
-    """
-    
-    def testClosure (self):
-        self.assertEquals(type(self.testScript.func_defaults), tuple)
-        self.assertEquals(type(self.testScript.func_defaults[0]), list)
-        self.assertNotEquals(self.testScript.func_defaults,
-                             self.testScript2.func_defaults)
-
-    def testRunScript (self):
-        self.runScript("""
-            2345678901 > echo?
-            2345678901 < 2345678901: echo?
-        """)
 
 if __name__ == "__main__":
     unittest.main()
