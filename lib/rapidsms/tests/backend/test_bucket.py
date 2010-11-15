@@ -16,7 +16,7 @@ def test_bucket_swallows_messages():
     router = Router()
     router.add_backend("mock", "rapidsms.backends.bucket")
     worker = threading.Thread(target=router.start)
-    worker.daemon = True
+    worker.setDaemon(True)
     worker.start()
 
     # wait until the router has started.

@@ -26,15 +26,18 @@ class TestScript (TransactionTestCase, LoggerMixin):
 
         class TestMyApp (TestScript):
             apps = (MyApp,)
-            testRegister = \"""
-               8005551212 > register as someuser
-               8005551212 < Registered new user 'someuser' for 8005551212!
-            \"""
+            
+            def testRegister(self):
+                self.assertInteraction(\"""
+                   8005551212 > register as someuser
+                   8005551212 < Registered new user 'someuser' for 8005551212!
+                \""")
 
-            testDirectMessage = \"""
-               8005551212 > tell anotheruser what's up??
-               8005550000 < someuser said "what's up??"
-            \"""
+            def testMyAppDirectMessage(self):
+                self.assertInteraction(\"""
+                   8005551212 > tell anotheruser what's up??
+                   8005550000 < someuser said "what's up??"
+                \""")
 
     This TestMyApp class would then work exactly as any other
     unittest.TestCase subclass (so you could, for example, call

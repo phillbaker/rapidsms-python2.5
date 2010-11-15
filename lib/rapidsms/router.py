@@ -123,7 +123,7 @@ class Router(object, LoggerMixin):
 
         while True:
             try:
-                self.debug("starting backend")
+                self.debug("starting backend %s" % backend)
                 started = backend.start()
                 self.debug("backend %s terminated normally" % backend)
                 return True
@@ -161,8 +161,9 @@ class Router(object, LoggerMixin):
                 target=self._start_backend,
                 args=(backend,))
 
-            worker.daemon = True
+            worker.setDaemon(True)
             worker.start()
+            
 
             # stash the worker thread in the backend, so we can check
             # whether it's still alive when _stop_all_backends is called
@@ -180,7 +181,7 @@ class Router(object, LoggerMixin):
             alive = backend.__thread.isAlive
             if not alive(): continue
             backend.stop()
-
+            
             if not self._wait(lambda: not alive(), 5):
                 backend.error("Worker thread did not terminate")
 
@@ -193,9 +194,11 @@ class Router(object, LoggerMixin):
         for app in self.apps:
             try:
                 app.start()
-
             except:
                 app.exception()
+                
+        class_names = [app.name for app in self.apps]
+        self.info("Registered: %s" % (", ".join(class_names)))
 
 
     def _stop_all_apps(self):

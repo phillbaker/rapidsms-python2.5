@@ -106,7 +106,7 @@ def test_backend_can_be_started_and_stopped():
     # pretty much everything else about the multi-threaded router.
 
     worker = threading.Thread(target=backend.start)
-    worker.daemon = True
+    worker.setDaemon(True)
     worker.start()
 
     while (backend.running is not True) and (start_delay < 1):
@@ -129,8 +129,8 @@ def test_backend_can_be_started_and_stopped():
 
     # wait for the thread to die, to ensure that backend isn't blocking.
 
-    while worker.isAlive and (die_delay < 1):
+    while worker.isAlive() and (die_delay < 1):
         die_delay += 0.1
         time.sleep(0.1)
     
-    assert die_delay < 2, "worker thread didn't die"
+    assert die_delay < 1, "worker thread didn't die"

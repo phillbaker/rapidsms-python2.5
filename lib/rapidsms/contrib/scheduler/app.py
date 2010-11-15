@@ -58,7 +58,7 @@ class SchedulerThread (threading.Thread):
         super(SchedulerThread, self).__init__(\
             target=self.scheduler_loop,\
             args=(schedule_interval,))
-        self.daemon = True
+        self.setDaemon(True)
         self._stop = threading.Event()
         self._speedup = None
         self._router = router

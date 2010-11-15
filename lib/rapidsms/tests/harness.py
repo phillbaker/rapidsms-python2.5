@@ -85,8 +85,3 @@ class MockApp (AppBase):
 
     def stop (self):
         self.calls.append(("stop",))
-
-class EchoApp (MockApp):
-    def handle (self, message):
-        MockApp.handle(self, message)
-        message.respond(message.peer + ": " + message.text)

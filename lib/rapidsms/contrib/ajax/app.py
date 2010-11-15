@@ -219,5 +219,5 @@ class App(AppBase):
         # start the server in a separate thread, and daemonize it to
         # prevent it from hanging once the main thread terminates
         self.thread = Thread(target=self.server.serve_forever)
-        self.thread.daemon = True
+        self.thread.setDaemon(True)
         self.thread.start()

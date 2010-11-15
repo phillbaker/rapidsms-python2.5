@@ -59,7 +59,7 @@ def test_router_starts_and_stops_apps_and_backends():
 
     # start in a separate thread, so we can test it asynchronously.
     worker = threading.Thread(target=router.start)
-    worker.daemon = True
+    worker.setDaemon(True)
     worker.start()
 
     # wait until the router has started.
